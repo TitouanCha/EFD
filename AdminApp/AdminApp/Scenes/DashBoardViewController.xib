@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="23504" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="ipad10_9rounded" orientation="portrait" layout="fullscreen" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23506"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="DashBoardViewController" customModule="AdminApp" customModuleProvider="target">
+            <connections>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="820" height="1180"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Dash Board" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yZ1-41-biu">
+                    <rect key="frame" x="100" y="74" width="620" height="48"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="40"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Livraisons en cours : " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="x7J-2C-883">
+                    <rect key="frame" x="125" y="202" width="570" height="36"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EZI-CE-QMU">
+                    <rect key="frame" x="200" y="638" width="420" height="56"/>
+                    <state key="normal" title="Button"/>
+                    <buttonConfiguration key="configuration" style="filled" title="Livreurs">
+                        <fontDescription key="titleFontDescription" type="system" pointSize="35"/>
+                        <color key="baseBackgroundColor" systemColor="systemBrownColor"/>
+                    </buttonConfiguration>
+                    <connections>
+                        <action selector="deliveryMenButton:" destination="-1" eventType="touchUpInside" id="Qst-pd-ZD6"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yF4-SU-abi">
+                    <rect key="frame" x="200" y="562" width="420" height="56"/>
+                    <state key="normal" title="Button"/>
+                    <buttonConfiguration key="configuration" style="filled" title="Tournées">
+                        <fontDescription key="titleFontDescription" type="system" pointSize="35"/>
+                        <color key="baseBackgroundColor" systemColor="systemBrownColor"/>
+                    </buttonConfiguration>
+                    <connections>
+                        <action selector="toursButton:" destination="-1" eventType="touchUpInside" id="5OW-GQ-pke"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Fp3-0S-1jm">
+                    <rect key="frame" x="200" y="714" width="420" height="56"/>
+                    <state key="normal" title="Button"/>
+                    <buttonConfiguration key="configuration" style="filled" title="Preuves de livraisons">
+                        <fontDescription key="titleFontDescription" type="system" pointSize="35"/>
+                        <color key="baseBackgroundColor" systemColor="systemBrownColor"/>
+                    </buttonConfiguration>
+                    <connections>
+                        <action selector="deliveryButton:" destination="-1" eventType="touchUpInside" id="JLm-TT-5Zw"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gRH-Qx-GBg">
+                    <rect key="frame" x="200" y="486" width="420" height="56"/>
+                    <state key="normal" title="Button"/>
+                    <buttonConfiguration key="configuration" style="filled" title="Map">
+                        <fontDescription key="titleFontDescription" type="system" pointSize="35"/>
+                        <color key="baseBackgroundColor" systemColor="systemBrownColor"/>
+                    </buttonConfiguration>
+                    <connections>
+                        <action selector="mapButton:" destination="-1" eventType="touchUpInside" id="ht0-ZR-LCN"/>
+                    </connections>
+                </button>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+            <constraints>
+                <constraint firstItem="yF4-SU-abi" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="2u6-uP-IaD"/>
+                <constraint firstItem="yF4-SU-abi" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="200" id="6VS-k1-P65"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="gRH-Qx-GBg" secondAttribute="trailing" constant="200" id="8Zf-C8-L0z"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="yF4-SU-abi" secondAttribute="trailing" constant="200" id="Arl-sp-rMx"/>
+                <constraint firstItem="Fp3-0S-1jm" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="200" id="IKl-dJ-kzu"/>
+                <constraint firstItem="yF4-SU-abi" firstAttribute="top" secondItem="gRH-Qx-GBg" secondAttribute="bottom" constant="20" id="NC4-M1-lcE"/>
+                <constraint firstItem="x7J-2C-883" firstAttribute="top" secondItem="yZ1-41-biu" secondAttribute="bottom" constant="80" id="RjS-qN-550"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="x7J-2C-883" secondAttribute="trailing" constant="125" id="U4s-Mw-Tlu"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="EZI-CE-QMU" secondAttribute="trailing" constant="200" id="WsA-Lr-mCG"/>
+                <constraint firstItem="EZI-CE-QMU" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="200" id="bNr-M5-5lm"/>
+                <constraint firstItem="yZ1-41-biu" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="50" id="cFn-DA-lyb"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="yZ1-41-biu" secondAttribute="trailing" constant="100" id="cJh-Qe-Wis"/>
+                <constraint firstItem="x7J-2C-883" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="125" id="gGd-jc-f0k"/>
+                <constraint firstItem="yZ1-41-biu" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="100" id="gxj-89-bcr"/>
+                <constraint firstItem="gRH-Qx-GBg" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="200" id="kr1-2l-Nq8"/>
+                <constraint firstItem="Fp3-0S-1jm" firstAttribute="top" secondItem="EZI-CE-QMU" secondAttribute="bottom" constant="20" id="lFA-yW-qoN"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="Fp3-0S-1jm" secondAttribute="trailing" constant="200" id="u1B-cM-KFz"/>
+                <constraint firstItem="EZI-CE-QMU" firstAttribute="top" secondItem="yF4-SU-abi" secondAttribute="bottom" constant="20" id="xsj-Ho-3mn"/>
+            </constraints>
+            <point key="canvasLocation" x="97.317073170731703" y="19.830508474576273"/>
+        </view>
+    </objects>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemBrownColor">
+            <color red="0.63529411759999999" green="0.51764705879999995" blue="0.36862745099999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+    </resources>
+</document>

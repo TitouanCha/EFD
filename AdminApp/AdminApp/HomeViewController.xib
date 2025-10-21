@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="23504" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="ipad10_9rounded" orientation="portrait" layout="fullscreen" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23506"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="HomeViewController" customModule="AdminApp" customModuleProvider="target">
+            <connections>
+                <outlet property="input_login" destination="3ui-J8-Q2e" id="4xB-qx-XOo"/>
+                <outlet property="input_password" destination="3LP-cv-thI" id="AMU-MU-QkR"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="820" height="1180"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Admin Login" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WyH-2o-Cy5">
+                    <rect key="frame" x="50" y="124" width="720" height="48"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="40"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="3LP-cv-thI">
+                    <rect key="frame" x="200" y="567.5" width="420" height="45.5"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                    <textInputTraits key="textInputTraits"/>
+                </textField>
+                <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Login" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="3ui-J8-Q2e">
+                    <rect key="frame" x="200" y="502" width="420" height="45.5"/>
+                    <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="30"/>
+                    <textInputTraits key="textInputTraits"/>
+                </textField>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PCA-LP-cyI">
+                    <rect key="frame" x="300" y="653" width="220" height="56"/>
+                    <state key="normal" title="Button"/>
+                    <buttonConfiguration key="configuration" style="plain" title="Connection">
+                        <backgroundConfiguration key="background">
+                            <color key="backgroundColor" systemColor="systemBrownColor"/>
+                            <color key="strokeColor" systemColor="systemBrownColor"/>
+                        </backgroundConfiguration>
+                        <fontDescription key="titleFontDescription" type="system" pointSize="35"/>
+                        <color key="baseForegroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </buttonConfiguration>
+                    <connections>
+                        <action selector="connection:" destination="-1" eventType="touchUpInside" id="A5H-Gm-uXN"/>
+                    </connections>
+                </button>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+            <constraints>
+                <constraint firstItem="WyH-2o-Cy5" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="100" id="2qa-q1-7MT"/>
+                <constraint firstItem="WyH-2o-Cy5" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="50" id="IVP-2K-9uI"/>
+                <constraint firstItem="3LP-cv-thI" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="M4g-5G-go9"/>
+                <constraint firstItem="3ui-J8-Q2e" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="W7S-2a-jpP"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="PCA-LP-cyI" secondAttribute="trailing" constant="300" id="Y4I-Ux-nHQ"/>
+                <constraint firstItem="3LP-cv-thI" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="200" id="dxr-iC-Efh"/>
+                <constraint firstItem="PCA-LP-cyI" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="300" id="fRi-Ef-JYY"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="3LP-cv-thI" secondAttribute="trailing" constant="200" id="fbc-D5-K84"/>
+                <constraint firstItem="3LP-cv-thI" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="hxV-E1-Mtl"/>
+                <constraint firstItem="3ui-J8-Q2e" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="200" id="kO5-ue-6qh"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="3ui-J8-Q2e" secondAttribute="trailing" constant="200" id="m3J-Qz-EC5"/>
+                <constraint firstItem="3LP-cv-thI" firstAttribute="top" secondItem="3ui-J8-Q2e" secondAttribute="bottom" constant="20" id="myA-3j-ov0"/>
+                <constraint firstItem="PCA-LP-cyI" firstAttribute="top" secondItem="3LP-cv-thI" secondAttribute="bottom" constant="40" id="pv6-jh-Can"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="WyH-2o-Cy5" secondAttribute="trailing" constant="50" id="qOR-u3-8v9"/>
+            </constraints>
+            <point key="canvasLocation" x="139.7560975609756" y="19.830508474576273"/>
+        </view>
+        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="T6Z-Bh-IqD">
+            <rect key="frame" x="0.0" y="0.0" width="42" height="21"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+            <nil key="textColor"/>
+            <nil key="highlightedColor"/>
+            <point key="canvasLocation" x="209" y="-69"/>
+        </label>
+    </objects>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemBrownColor">
+            <color red="0.63529411759999999" green="0.51764705879999995" blue="0.36862745099999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+    </resources>
+</document>

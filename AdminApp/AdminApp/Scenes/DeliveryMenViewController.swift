@@ -1,13 +1,13 @@
 //
-//  HomeViewController.swift
+//  DeliveryMenViewController.swift
 //  AdminApp
 //
-//  Created by Titouan Chauché on 06/10/2025.
+//  Created by Titouan Chauché on 21/10/2025.
 //
 
 import UIKit
 
-class HomeViewController: UIViewController {
+class DeliveryMenViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
