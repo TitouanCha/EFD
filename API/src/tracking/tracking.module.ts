@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 import { TrackingController } from './tracking.controller';
 import { MongooseModule } from '@nestjs/mongoose';
-import { Parcel, ParcelSchema } from '../parcels/parcel.schema';
+import { Parcel, ParcelSchema } from '../parcels/parcels.shema';
 import { Tour, TourSchema } from '../tours/tour.schema';
 
 

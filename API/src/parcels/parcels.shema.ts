@@ -29,4 +29,3 @@ tourId?: Types.ObjectId;
 
 export const ParcelSchema = SchemaFactory.createForClass(Parcel);
 ParcelSchema.index({ destination: '2dsphere' });
-ParcelSchema.index({ trackingId: 1 }, { unique: true });

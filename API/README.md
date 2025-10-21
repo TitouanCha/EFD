@@ -1,15 +1,9 @@
 # Build and Run API
 
-Docker Desktop is required
+docker build -t efd-api .
 
-1. BUILD
+docker network create efd-net
 
-```shell
-docker build -t gas-station-api .
-```
+docker run -d --name efd-mongo --network efd-net -p 27017:27017 \ -e MONGO_INITDB_ROOT_USERNAME=root -e MONGO_INITDB_ROOT_PASSWORD=root mongo:7
 
-2. RUN ON PORT 3001 on your machine
-
-```shell
-docker run -d -p 3001:3000 gas-station-api
-```
+docker run -d --name efd-api --network efd-net -p 3001:3000 \ -e MONGO_URI="mongodb://root:root@efd-mongo:27017/efd?authSource=admin" \ -e JWT_SECRET="super_secret" -e JWT_EXPIRES="7d" efd-api

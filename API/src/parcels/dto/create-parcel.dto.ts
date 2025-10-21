@@ -5,3 +5,4 @@ export class CreateParcelDto {
 @IsString() recipientName: string;
 @IsString() address: string;
 @IsOptional() destination?: { type: 'Point'; coordinates: [number, number] };
+}

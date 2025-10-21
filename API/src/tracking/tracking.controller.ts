@@ -1,7 +1,7 @@
 import { Controller, Get, Param } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
-import { Parcel } from '../parcels/parcel.schema';
+import { Parcel } from '../parcels/parcels.shema';
 import { Tour } from '../tours/tour.schema';
 
 

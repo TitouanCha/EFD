@@ -2,7 +2,7 @@ import { BadRequestException, Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model, Types } from 'mongoose';
 import { Proof } from './proof.schema';
-import { Parcel, ParcelStatus } from '../parcels/parcel.schema';
+import { Parcel, ParcelStatus } from '../parcels/parcels.shema';
 import { ToursService } from '../tours/tours.service';
 
 
