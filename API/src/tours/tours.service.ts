@@ -36,18 +36,18 @@ return this.update(tourId, { courierId: new Types.ObjectId(courierId), status: T
 
 
 async autoAssign(date: string) {
-// Simplifié : distribue équitablement par nombre de colis entre livreurs dispos
-const tours = await this.model.find({ date }).lean();
-const couriers = await (this.model.db as any).model('User').find({ role: 'COURIER' }).lean();
-if (!couriers.length) throw new BadRequestException('No couriers');
-let idx = 0;
-const updates = [] as any[];
-for (const t of tours) {
-const courier = couriers[idx % couriers.length];
-updates.push(this.assign(t._id.toString(), courier._id.toString()));
-idx++;
-}
-return Promise.all(updates);
+    // Simplifié : distribue équitablement par nombre de colis entre livreurs dispos
+    const tours = await this.model.find({ date }).lean();
+    const couriers = await (this.model.db as any).model('User').find({ role: 'COURIER' }).lean();
+    if (!couriers.length) throw new BadRequestException('No couriers');
+    let idx = 0;
+    const updates = [] as any[];
+    for (const t of tours) {
+        const courier = couriers[idx % couriers.length];
+        updates.push(this.assign(t._id.toString(), courier._id.toString()));
+        idx++;
+    }
+    return Promise.all(updates);
 }
 
 

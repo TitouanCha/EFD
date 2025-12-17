@@ -15,8 +15,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
         let window = UIWindow(frame: UIScreen.main.bounds)
-        window.rootViewController =
-        UINavigationController(rootViewController:HomeViewController())
+        if(UserDefaults.standard.string(forKey: "API_TOKEN") != nil) {
+            window.rootViewController =
+            UINavigationController(rootViewController:DashBoardViewController())
+        }else {
+            window.rootViewController =
+            UINavigationController(rootViewController:HomeViewController())
+        }
         window.makeKeyAndVisible()
         self.window = window
         

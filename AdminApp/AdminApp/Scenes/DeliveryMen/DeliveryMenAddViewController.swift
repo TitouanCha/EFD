@@ -1,13 +1,13 @@
 //
-//  DeliveryMenViewController.swift
+//  DeliveryMenAddViewController.swift
 //  AdminApp
 //
-//  Created by Titouan Chauché on 21/10/2025.
+//  Created by Titouan Chauché on 17/12/2025.
 //
 
 import UIKit
 
-class DeliveryMenViewController: UIViewController {
+class DeliveryMenAddViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()

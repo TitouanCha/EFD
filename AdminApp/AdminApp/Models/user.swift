@@ -5,6 +5,17 @@
 //  Created by Titouan Chauché on 27/10/2025.
 //
 
+public enum UserRole: String, CustomStringConvertible {
+    case ADMIN
+    case CLIENT
+    case COURIER
+    public var description: String {
+        return self.rawValue
+    }
+}
+
+
+
 class User{
     let access_token: String
     let id: String
@@ -33,7 +44,18 @@ extension User{
         else {
             return nil
         }
-        
         self.init(access_token: access_token, id: id, email: email, role: role, name: name)
     }
+    
+    convenience init?(fromAPI response: [String: Any]) {
+        guard let id = response["_id"] as? String,
+              let email = response["email"] as? String,
+              let role = response["role"] as? String,
+              let name = response["name"] as? String
+        else {
+            return nil
+        }
+        self.init(access_token: "", id: id, email: email, role: role, name: name)
+    }
 }
+
