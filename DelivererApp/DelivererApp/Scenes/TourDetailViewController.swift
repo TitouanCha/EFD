@@ -11,7 +11,7 @@ import CoreLocation
 
 class TourDetailViewController: UIViewController {
 
-    // MARK: - Outlets (LIÉS AU FILE'S OWNER)
+    // MARK: - Outlets
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var statusLabel: UILabel!
     @IBOutlet weak var parcelsLabel: UILabel!
@@ -20,6 +20,7 @@ class TourDetailViewController: UIViewController {
 
     // MARK: - Data
     var tour: Tour!
+    private var currentParcelIndex = 0
 
     // MARK: - Location
     private let locationManager = CLLocationManager()
@@ -32,23 +33,24 @@ class TourDetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Détail tournée"
-        displayTour()
-        setupLocation()
         setupButton()
+        setupLocation()
+        updateUI()
+        showCurrentParcelOnMap()
     }
 
     // MARK: - UI
-    private func displayTour() {
-        dateLabel.text = "Date : \(tour.date)"
-        statusLabel.text = "Statut : \(tour.status)"
-        parcelsLabel.text = "Colis : \(tour.parcelIds.count)"
-    }
-
     private func setupButton() {
         validateButton.setTitle("Valider la livraison", for: .normal)
         validateButton.layer.cornerRadius = 10
         validateButton.backgroundColor = .systemBlue
         validateButton.setTitleColor(.white, for: .normal)
+    }
+
+    private func updateUI() {
+        dateLabel.text = "Date : \(tour.date)"
+        statusLabel.text = "Statut : \(tour.status)"
+        parcelsLabel.text = "Colis : \(currentParcelIndex + 1)/\(tour.parcelIds.count)"
     }
 
     // MARK: - Location
@@ -59,17 +61,50 @@ class TourDetailViewController: UIViewController {
         mapView.showsUserLocation = true
     }
 
+    // MARK: - Map
+    private func showCurrentParcelOnMap() {
+        mapView.removeAnnotations(mapView.annotations)
+
+        guard currentParcelIndex < tour.parcelIds.count else { return }
+        let parcel = tour.parcelIds[currentParcelIndex]
+
+        let lng = parcel.destination.coordinates[0]
+        let lat = parcel.destination.coordinates[1]
+
+        let coordinate = CLLocationCoordinate2D(latitude: lat, longitude: lng)
+
+        let annotation = MKPointAnnotation()
+        annotation.coordinate = coordinate
+        annotation.title = parcel.recipientName
+        annotation.subtitle = parcel.address
+
+        mapView.addAnnotation(annotation)
+
+        let region = MKCoordinateRegion(
+            center: coordinate,
+            latitudinalMeters: 800,
+            longitudinalMeters: 800
+        )
+
+        mapView.setRegion(region, animated: true)
+    }
+
     // MARK: - Actions
     @IBAction func validateTapped(_ sender: UIButton) {
         openCamera()
     }
 
     private func openCamera() {
-        guard UIImagePickerController.isSourceTypeAvailable(.camera) else { return }
-
         let picker = UIImagePickerController()
-        picker.sourceType = .camera
         picker.delegate = self
+
+        if UIImagePickerController.isSourceTypeAvailable(.camera) {
+            picker.sourceType = .camera
+        } else {
+            // Simulateur → galerie
+            picker.sourceType = .photoLibrary
+        }
+
         present(picker, animated: true)
     }
 
@@ -78,18 +113,37 @@ class TourDetailViewController: UIViewController {
         guard
             let image = selectedImage,
             let location = currentLocation,
-            let parcelId = tour.parcelIds.first
+            let token = SessionManager.shared.token,
+            let courierId = SessionManager.shared.userId,
+            currentParcelIndex < tour.parcelIds.count
         else { return }
 
+        let parcel = tour.parcelIds[currentParcelIndex]
+
         AuthAPI.shared.sendProof(
-            parcelId: parcelId,
+            token: token,
+            courierId: courierId,
+            parcelId: parcel.id,
             image: image,
             lat: location.coordinate.latitude,
             lng: location.coordinate.longitude
         ) {
             DispatchQueue.main.async {
-                self.navigationController?.popViewController(animated: true)
+                self.handleNextParcel()
             }
+        }
+    }
+
+    private func handleNextParcel() {
+        selectedImage = nil
+        currentParcelIndex += 1
+
+        if currentParcelIndex < tour.parcelIds.count {
+            updateUI()
+            showCurrentParcelOnMap()
+        } else {
+            // Tous les colis livrés → l’API passera la tournée en COMPLETED
+            self.navigationController?.popViewController(animated: true)
         }
     }
 }
