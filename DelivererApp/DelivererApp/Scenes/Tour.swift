@@ -9,6 +9,14 @@ struct Tour: Codable {
     let id: String
     let date: String
     let status: String
-    let parcelCount: Int
+    let parcelIds: [String]
+
+    enum CodingKeys: String, CodingKey {
+        case id = "_id"
+        case date
+        case status
+        case parcelIds
+    }
 }
+
 

@@ -11,31 +11,47 @@ import CoreLocation
 
 class TourDetailViewController: UIViewController {
 
+    // MARK: - Outlets (LIÉS AU FILE'S OWNER)
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var statusLabel: UILabel!
     @IBOutlet weak var parcelsLabel: UILabel!
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var validateButton: UIButton!
 
+    // MARK: - Data
     var tour: Tour!
 
+    // MARK: - Location
     private let locationManager = CLLocationManager()
     private var currentLocation: CLLocation?
+
+    // MARK: - Image
     private var selectedImage: UIImage?
 
+    // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Détail tournée"
         displayTour()
         setupLocation()
+        setupButton()
     }
 
+    // MARK: - UI
     private func displayTour() {
         dateLabel.text = "Date : \(tour.date)"
         statusLabel.text = "Statut : \(tour.status)"
-        parcelsLabel.text = "Colis : \(tour.parcelCount)"
+        parcelsLabel.text = "Colis : \(tour.parcelIds.count)"
     }
 
+    private func setupButton() {
+        validateButton.setTitle("Valider la livraison", for: .normal)
+        validateButton.layer.cornerRadius = 10
+        validateButton.backgroundColor = .systemBlue
+        validateButton.setTitleColor(.white, for: .normal)
+    }
+
+    // MARK: - Location
     private func setupLocation() {
         locationManager.delegate = self
         locationManager.requestWhenInUseAuthorization()
@@ -43,6 +59,7 @@ class TourDetailViewController: UIViewController {
         mapView.showsUserLocation = true
     }
 
+    // MARK: - Actions
     @IBAction func validateTapped(_ sender: UIButton) {
         openCamera()
     }
@@ -56,50 +73,36 @@ class TourDetailViewController: UIViewController {
         present(picker, animated: true)
     }
 
+    // MARK: - API
     private func sendProof() {
         guard
             let image = selectedImage,
             let location = currentLocation,
-            let token = SessionManager.shared.token
+            let parcelId = tour.parcelIds.first
         else { return }
 
         AuthAPI.shared.sendProof(
-            token: token,
-            tourId: tour.id,
+            parcelId: parcelId,
             image: image,
             lat: location.coordinate.latitude,
             lng: location.coordinate.longitude
         ) {
             DispatchQueue.main.async {
-                self.showSuccess()
+                self.navigationController?.popViewController(animated: true)
             }
         }
     }
-
-    private func showSuccess() {
-        let alert = UIAlertController(
-            title: "Succès",
-            message: "Livraison validée",
-            preferredStyle: .alert
-        )
-
-        alert.addAction(UIAlertAction(title: "OK", style: .default) { _ in
-            self.navigationController?.popViewController(animated: true)
-        })
-
-        present(alert, animated: true)
-    }
-
 }
 
+// MARK: - CLLocationManagerDelegate
 extension TourDetailViewController: CLLocationManagerDelegate {
-
     func locationManager(_ manager: CLLocationManager,
                          didUpdateLocations locations: [CLLocation]) {
         currentLocation = locations.first
     }
 }
 
+// MARK: - UIImagePickerControllerDelegate
 extension TourDetailViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
     func imagePickerController(_ picker: UIImagePickerController,
@@ -110,5 +113,4 @@ extension TourDetailViewController: UIImagePickerControllerDelegate, UINavigatio
         sendProof()
     }
 }
-
 

@@ -14,128 +14,99 @@ final class AuthAPI {
 
     private let baseURL = "http://localhost:3001"
 
-    func login(email: String,
-               password: String,
-               completion: @escaping (Result<LoginResponse, Error>) -> Void) {
+    // MARK: - LOGIN
 
-        guard let url = URL(string: "\(baseURL)/auth/login") else { return }
-
+    func login(
+        email: String,
+        password: String,
+        completion: @escaping (Result<LoginResponse, Error>) -> Void
+    ) {
+        let url = URL(string: "\(baseURL)/auth/login")!
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
 
-        let body: [String: Any] = [
-            "email": email,
-            "password": password
-        ]
-
+        let body = ["email": email, "password": password]
         request.httpBody = try? JSONSerialization.data(withJSONObject: body)
 
-        URLSession.shared.dataTask(with: request) { data, response, error in
-
+        URLSession.shared.dataTask(with: request) { data, _, error in
             if let error = error {
                 completion(.failure(error))
                 return
             }
-
-            guard let data = data else { return }
-
-            do {
-                let decoded = try JSONDecoder().decode(LoginResponse.self, from: data)
-                completion(.success(decoded))
-            } catch {
-                completion(.failure(error))
-            }
-
+            let decoded = try! JSONDecoder().decode(LoginResponse.self, from: data!)
+            completion(.success(decoded))
         }.resume()
     }
 
-    func getTours(token: String,
-                  completion: @escaping ([Tour]) -> Void) {
+    // MARK: - TOURS (TOKEN REQUIRED)
 
-        guard let url = URL(string: "\(baseURL)/tours") else { return }
+    func getMyTours(completion: @escaping ([Tour]) -> Void) {
 
+        guard
+            let token = SessionManager.shared.token,
+            let courierId = SessionManager.shared.userId
+        else {
+            completion([])
+            return
+        }
+
+        let url = URL(string: "\(baseURL)/tours/courier/\(courierId)")!
         var request = URLRequest(url: url)
-        request.httpMethod = "GET"
         request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
 
         URLSession.shared.dataTask(with: request) { data, _, _ in
-            guard let data = data else { return }
-
-            if let tours = try? JSONDecoder().decode([Tour].self, from: data) {
-                completion(tours)
-            }
+            let tours = (try? JSONDecoder().decode([Tour].self, from: data!)) ?? []
+            completion(tours)
         }.resume()
     }
 
-    func sendProof(token: String,
-                   tourId: String,
-                   image: UIImage,
-                   lat: Double,
-                   lng: Double,
-                   completion: @escaping () -> Void) {
+    // MARK: - PROOFS (TOKEN REQUIRED)
 
-        guard let url = URL(string: "\(baseURL)/proofs") else { return }
+    func sendProof(
+        parcelId: String,
+        image: UIImage,
+        lat: Double,
+        lng: Double,
+        completion: @escaping () -> Void
+    ) {
+        guard let token = SessionManager.shared.token else { return }
 
+        let url = URL(string: "\(baseURL)/proofs")!
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
 
         let boundary = UUID().uuidString
-        request.setValue(
-            "multipart/form-data; boundary=\(boundary)",
-            forHTTPHeaderField: "Content-Type"
-        )
+        request.setValue("multipart/form-data; boundary=\(boundary)", forHTTPHeaderField: "Content-Type")
 
-        let body = createMultipartBody(
-            boundary: boundary,
-            tourId: tourId,
-            image: image,
-            lat: lat,
-            lng: lng
-        )
+        var data = Data()
 
-        request.httpBody = body
+        func add(_ s: String) { data.append(s.data(using: .utf8)!) }
+
+        add("--\(boundary)\r\n")
+        add("Content-Disposition: form-data; name=\"parcelId\"\r\n\r\n\(parcelId)\r\n")
+
+        add("--\(boundary)\r\n")
+        add("Content-Disposition: form-data; name=\"lat\"\r\n\r\n\(lat)\r\n")
+
+        add("--\(boundary)\r\n")
+        add("Content-Disposition: form-data; name=\"lng\"\r\n\r\n\(lng)\r\n")
+
+        if let img = image.jpegData(compressionQuality: 0.7) {
+            add("--\(boundary)\r\n")
+            add("Content-Disposition: form-data; name=\"image\"; filename=\"proof.jpg\"\r\n")
+            add("Content-Type: image/jpeg\r\n\r\n")
+            data.append(img)
+            add("\r\n")
+        }
+
+        add("--\(boundary)--\r\n")
+        request.httpBody = data
 
         URLSession.shared.dataTask(with: request) { _, _, _ in
             completion()
         }.resume()
-    }
-
-    private func createMultipartBody(boundary: String,
-                                     tourId: String,
-                                     image: UIImage,
-                                     lat: Double,
-                                     lng: Double) -> Data {
-
-        var data = Data()
-
-        func append(_ string: String) {
-            data.append(string.data(using: .utf8)!)
-        }
-
-        append("--\(boundary)\r\n")
-        append("Content-Disposition: form-data; name=\"tourId\"\r\n\r\n")
-        append("\(tourId)\r\n")
-
-        append("--\(boundary)\r\n")
-        append("Content-Disposition: form-data; name=\"lat\"\r\n\r\n")
-        append("\(lat)\r\n")
-
-        append("--\(boundary)\r\n")
-        append("Content-Disposition: form-data; name=\"lng\"\r\n\r\n")
-        append("\(lng)\r\n")
-
-        if let imageData = image.jpegData(compressionQuality: 0.7) {
-            append("--\(boundary)\r\n")
-            append("Content-Disposition: form-data; name=\"image\"; filename=\"proof.jpg\"\r\n")
-            append("Content-Type: image/jpeg\r\n\r\n")
-            data.append(imageData)
-            append("\r\n")
-        }
-
-        append("--\(boundary)--\r\n")
-        return data
     }
 }
 

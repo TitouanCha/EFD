@@ -4,13 +4,11 @@
 //
 //  Created by Hugo Miesch on 18/12/2025.
 //
-
 import UIKit
 
 class ToursViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
-
     private var tours: [Tour] = []
 
     override func viewDidLoad() {
@@ -22,22 +20,14 @@ class ToursViewController: UIViewController {
     private func setupTableView() {
         tableView.dataSource = self
         tableView.delegate = self
+        tableView.separatorStyle = .none
 
         let nib = UINib(nibName: "TourCell", bundle: nil)
         tableView.register(nib, forCellReuseIdentifier: "TourCell")
-
-        tableView.separatorStyle = .none
-        tableView.backgroundColor = .clear
-    }
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        fetchTours()
     }
 
     private func fetchTours() {
-        guard let token = SessionManager.shared.token else { return }
-
-        AuthAPI.shared.getTours(token: token) { tours in
+        AuthAPI.shared.getMyTours { tours in
             DispatchQueue.main.async {
                 self.tours = tours
                 self.tableView.reloadData()
@@ -48,8 +38,7 @@ class ToursViewController: UIViewController {
 
 extension ToursViewController: UITableViewDataSource, UITableViewDelegate {
 
-    func tableView(_ tableView: UITableView,
-                   numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         tours.count
     }
 
@@ -65,14 +54,13 @@ extension ToursViewController: UITableViewDataSource, UITableViewDelegate {
         return cell
     }
 
-    func tableView(_ tableView: UITableView,
-                   didSelectRowAt indexPath: IndexPath) {
-
-        let detailVC = TourDetailViewController(
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let vc = TourDetailViewController(
             nibName: "TourDetailViewController",
             bundle: nil
         )
-        detailVC.tour = tours[indexPath.row]
-        navigationController?.pushViewController(detailVC, animated: true)
+        vc.tour = tours[indexPath.row]
+        navigationController?.pushViewController(vc, animated: true)
     }
 }
+

@@ -7,23 +7,35 @@
 
 import UIKit
 
-class TourCell: UITableViewCell {
+final class TourCell: UITableViewCell {
 
-    @IBOutlet weak var dateLabel: UILabel!
-    @IBOutlet weak var statusLabel: UILabel!
-    @IBOutlet weak var parcelsLabel: UILabel!
+    @IBOutlet private weak var dateLabel: UILabel!
+    @IBOutlet private weak var statusLabel: UILabel!
+    @IBOutlet private weak var parcelsLabel: UILabel!
+
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        backgroundColor = UIColor(red: 0xED/255, green: 0xE8/255, blue: 0xD0/255, alpha: 1) // beige
+        selectionStyle = .none
+    }
 
     func configure(with tour: Tour) {
-        dateLabel.text = "\(tour.date)"
-        parcelsLabel.text = "Colis : \(tour.parcelCount)"
+        dateLabel.text = "Date : \(tour.date)"
+        parcelsLabel.text = "Colis : \(tour.parcelIds.count)"
 
-        if tour.status == "COMPLETED" {
-            statusLabel.text = "Terminée"
-            statusLabel.textColor = .systemGreen
-        } else {
+        switch tour.status {
+        case "ASSIGNED":
+            statusLabel.text = "Assignée"
+            statusLabel.textColor = .systemOrange
+        case "IN_PROGRESS":
             statusLabel.text = "En cours"
+            statusLabel.textColor = .systemGreen
+        case "COMPLETED":
+            statusLabel.text = "Terminée"
+            statusLabel.textColor = .systemGray
+        default:
+            statusLabel.text = tour.status
             statusLabel.textColor = .brown
         }
     }
 }
-

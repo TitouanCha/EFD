@@ -19,11 +19,12 @@ class LoginViewController: UIViewController {
     }
 
     @IBAction func loginTapped(_ sender: UIButton) {
+
         guard
             let email = emailField.text, !email.isEmpty,
             let password = passwordField.text, !password.isEmpty
         else {
-            showAlert(title: "Erreur", message: "Veuillez remplir tous les champs")
+            showAlert("Erreur", "Veuillez remplir tous les champs")
             return
         }
 
@@ -34,38 +35,39 @@ class LoginViewController: UIViewController {
                 self.loginButton.isEnabled = true
 
                 switch result {
-                case .success(let response):
-                    SessionManager.shared.token = response.access_token
+                case .success(let res):
+
+                    SessionManager.shared.saveSession(
+                        token: res.access_token,
+                        userId: res.user.id,
+                        role: res.user.role
+                    )
+
                     self.goToHome()
 
                 case .failure:
-                    self.showAlert(title: "Erreur", message: "Identifiants incorrects")
+                    self.showAlert("Erreur", "Identifiants incorrects")
                 }
             }
         }
     }
 
     private func goToHome() {
-        let homeVC = HomeViewController()
-        homeVC.modalPresentationStyle = .fullScreen
-        present(homeVC, animated: true)
+        let vc = HomeViewController(
+            nibName: "HomeViewController",
+            bundle: nil
+        )
+        navigationController?.setViewControllers([vc], animated: true)
     }
 
-    private func showAlert(title: String, message: String) {
-        let alert = UIAlertController(
-            title: title,
-            message: message,
-            preferredStyle: .alert
-        )
+    private func showAlert(_ title: String, _ msg: String) {
+        let alert = UIAlertController(title: title, message: msg, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: .default))
         present(alert, animated: true)
     }
 
     private func hideKeyboardOnTap() {
-        let tap = UITapGestureRecognizer(
-            target: self,
-            action: #selector(dismissKeyboard)
-        )
+        let tap = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
         view.addGestureRecognizer(tap)
     }
 
