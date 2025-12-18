@@ -9,21 +9,25 @@ import UIKit
 
 class HomeViewController: UIViewController {
 
+    @IBOutlet weak var seeToursButton: UIButton!
+    @IBOutlet weak var logoutButton: UIButton!
+
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
     }
+    @IBAction func seeToursTapped(_ sender: UIButton) {
+            let vc = ToursViewController(nibName: "ToursViewController", bundle: nil)
+            navigationController?.pushViewController(vc, animated: true)
+        }
 
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    @IBAction func logoutTapped(_ sender: UIButton) {
+        SessionManager.shared.token = nil
+        goToLogin()
     }
-    */
-
+    private func goToLogin() {
+        let loginVC = LoginViewController()
+        loginVC.modalPresentationStyle = .fullScreen
+        present(loginVC, animated: true)
+    }
 }
+
