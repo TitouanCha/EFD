@@ -16,16 +16,34 @@ private parcels: ParcelsService,
 
 
 async create(date: string, parcelIds: string[], courierId?: string) {
-const tour = await this.model.create({ date, parcelIds, courierId, status: courierId ? TourStatus.ASSIGNED : TourStatus.DRAFT });
-await this.parcelModel.updateMany({ _id: { $in: parcelIds } }, { status: ParcelStatus.OUT_FOR_DELIVERY, tourId: tour._id });
-return tour;
-}
+    const objectIdParcels = parcelIds.map(id => new Types.ObjectId(id));
+    const objectIdCourier = courierId ? new Types.ObjectId(courierId) : undefined;
 
-findAll() { 
+    const tour = await this.model.create({ 
+      date, 
+      parcelIds: objectIdParcels, 
+      courierId: objectIdCourier, 
+      status: courierId ? TourStatus.ASSIGNED : TourStatus.DRAFT 
+    });
+
+    await this.parcelModel.updateMany(
+      { _id: { $in: objectIdParcels } }, 
+      { status: ParcelStatus.OUT_FOR_DELIVERY, tourId: tour._id }
+    );
     return this.model
-      .find()
+      .findById(tour._id)
       .populate('parcelIds', 'trackingId recipientName address destination status weightKg')
-      .lean(); 
+      .lean();
+  }
+
+async findAll() { 
+    return this.model 
+        .find() 
+        .populate({
+            path: 'parcelIds',
+            select: 'trackingId recipientName address destination status weightKg'
+          })
+        .lean(); 
 }
 
 findOne(id: string) { return this.model.findById(id).lean(); }
