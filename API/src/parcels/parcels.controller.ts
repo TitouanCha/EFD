@@ -7,6 +7,7 @@ import { Roles } from '../common/decorators/roles.decorator';
 import { Role } from '../common/roles';
 import { RolesGuard } from '../common/guards/roles.guard';
 import { AuthGuard } from '@nestjs/passport';
+import { Req } from '@nestjs/common';
 
 
 @ApiTags('parcels')
@@ -40,4 +41,15 @@ update(@Param('id') id: string, @Body() dto: UpdateParcelDto) { return this.parc
 @Roles(Role.ADMIN)
 @Delete(':id')
 remove(@Param('id') id: string) { return this.parcels.remove(id); }
+
+@Roles(Role.COURIER)
+@Get('my')
+findMyParcels(@Req() req: any) {
+  return this.parcels.findByCourier(req.user.sub);
+}
+@Roles(Role.COURIER)
+@Patch(':id/delivered')
+markDelivered(@Param('id') id: string) {
+  return this.parcels.markDelivered(id);
+}
 }

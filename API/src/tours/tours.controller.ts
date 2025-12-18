@@ -5,7 +5,8 @@ import { Role } from '../common/roles';
 import { RolesGuard } from '../common/guards/roles.guard';
 import { AuthGuard } from '@nestjs/passport';
 import { ToursService } from './tours.service';
-
+import { Req } from '@nestjs/common';
+import { TourStatus } from './tour.schema';
 
 @ApiTags('tours')
 @ApiBearerAuth()
@@ -14,6 +15,18 @@ import { ToursService } from './tours.service';
 export class ToursController {
 constructor(private readonly tours: ToursService) {}
 
+  @Get('courier/:courierId')
+  findByCourier(@Param('courierId') courierId: string) {
+    return this.tours.findByCourier(courierId);
+  }
+
+  @Patch(':id/status')
+  updateStatus(
+    @Param('id') id: string,
+    @Body() body: { status: TourStatus }
+  ) {
+    return this.tours.updateStatus(id, body.status);
+  }
 
 @Roles(Role.ADMIN)
 @Post()
@@ -50,4 +63,5 @@ assign(@Param('id') id: string, @Param('courierId') courierId: string) { return 
 @Roles(Role.ADMIN)
 @Post('auto-assign')
 autoAssign(@Body() body: { date: string }) { return this.tours.autoAssign(body.date); }
+
 }

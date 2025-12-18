@@ -64,4 +64,23 @@ if (!t) return;
 const count = await this.parcelModel.countDocuments({ _id: { $in: t.parcelIds }, status: { $ne: ParcelStatus.DELIVERED } });
 if (count === 0) await this.model.findByIdAndUpdate(tourId, { status: TourStatus.COMPLETED });
 }
+
+findByCourier(courierId: string) {
+  return this.model
+    .find({
+      courierId,
+      status: { $ne: TourStatus.DRAFT }
+    })
+    .populate('parcelIds')
+    .lean();
+}
+
+async updateStatus(tourId: string, status: TourStatus) {
+  return this.model.findByIdAndUpdate(
+    tourId,
+    { status },
+    { new: true }
+  ).lean();
+}
+
 }

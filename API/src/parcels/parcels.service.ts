@@ -18,4 +18,10 @@ findByTrackingId(trackingId: string) { return this.model.findOne({ trackingId })
 update(id: string, dto: UpdateParcelDto) { return this.model.findByIdAndUpdate(id, dto, { new: true }).lean(); }
 remove(id: string) { return this.model.findByIdAndDelete(id).lean(); }
 markDelivered(id: string) { return this.model.findByIdAndUpdate(id, { status: ParcelStatus.DELIVERED }, { new: true }).lean(); }
+findByCourier(courierId: string) {
+  return this.model
+    .find({ courierId })
+    .lean();
+}
+
 }
