@@ -1,22 +1,92 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13142" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="23504" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="ipad10_9rounded" orientation="portrait" layout="fullscreen" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12042"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23506"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ToursViewController" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ToursViewController" customModule="AdminApp" customModuleProvider="target">
             <connections>
+                <outlet property="tourTableView" destination="ala-lc-Gcd" id="jdr-vJ-tgY"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
-            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <rect key="frame" x="0.0" y="0.0" width="820" height="1180"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-            <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+            <subviews>
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="livraison-rapide" translatesAutoresizingMaskIntoConstraints="NO" id="SAt-I4-2HD">
+                    <rect key="frame" x="40" y="24" width="740" height="165"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="165" id="2DG-qS-CWr"/>
+                    </constraints>
+                </imageView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Gestion des tournées" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3Bc-NS-8Cc">
+                    <rect key="frame" x="20" y="189" width="394" height="48"/>
+                    <fontDescription key="fontDescription" type="boldSystem" pointSize="40"/>
+                    <color key="textColor" red="0.25134855509999998" green="0.15969821810000001" blue="0.1523262262" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FrZ-CB-PwG">
+                    <rect key="frame" x="541" y="189" width="259" height="50"/>
+                    <state key="normal" title="Button"/>
+                    <buttonConfiguration key="configuration" style="filled" title="Nouvelle Tournée">
+                        <fontDescription key="titleFontDescription" type="system" weight="semibold" pointSize="30"/>
+                        <color key="baseForegroundColor" red="0.91368454690000001" green="0.88223129509999998" blue="0.83181983230000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="baseBackgroundColor" red="0.080517239870000007" green="0.099912457169999996" blue="0.19818994400000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    </buttonConfiguration>
+                    <connections>
+                        <action selector="addTourbtn:" destination="-1" eventType="touchUpInside" id="EZy-hU-3cQ"/>
+                    </connections>
+                </button>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="ala-lc-Gcd">
+                    <rect key="frame" x="20" y="254" width="780" height="906"/>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    <inset key="separatorInset" minX="15" minY="0.0" maxX="0.0" maxY="0.0"/>
+                    <color key="sectionIndexColor" red="0.071494705975055695" green="0.090671442449092865" blue="0.18420949578285217" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <color key="sectionIndexBackgroundColor" red="0.91368454694747925" green="0.88223129510879517" blue="0.83181983232498169" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                </tableView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gyd-Wg-XkF">
+                    <rect key="frame" x="717" y="24" width="83" height="38"/>
+                    <state key="normal" title="Button"/>
+                    <buttonConfiguration key="configuration" style="plain" title="Retour">
+                        <fontDescription key="titleFontDescription" type="system" pointSize="20"/>
+                        <color key="baseForegroundColor" red="0.071494705975055695" green="0.090671442449092865" blue="0.18420949578285217" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    </buttonConfiguration>
+                    <connections>
+                        <action selector="goBackBtn:" destination="-1" eventType="touchUpInside" id="Smc-OO-gue"/>
+                    </connections>
+                </button>
+            </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+            <color key="backgroundColor" red="0.91368454694747925" green="0.88223129510879517" blue="0.83181983232498169" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="FrZ-CB-PwG" secondAttribute="trailing" constant="20" id="2gF-ED-TbS"/>
+                <constraint firstItem="SAt-I4-2HD" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="40" id="39d-3v-f4G"/>
+                <constraint firstItem="3Bc-NS-8Cc" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="3Pz-Xl-Zf3"/>
+                <constraint firstItem="gyd-Wg-XkF" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="Gck-sZ-u9d"/>
+                <constraint firstItem="3Bc-NS-8Cc" firstAttribute="top" secondItem="SAt-I4-2HD" secondAttribute="bottom" id="IIs-Ve-4oE"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="gyd-Wg-XkF" secondAttribute="trailing" constant="20" id="Jxz-kq-W55"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="SAt-I4-2HD" secondAttribute="trailing" constant="40" id="XgA-LU-zen"/>
+                <constraint firstItem="ala-lc-Gcd" firstAttribute="bottom" secondItem="fnl-2z-Ty3" secondAttribute="bottom" id="YEE-AJ-bMB"/>
+                <constraint firstItem="ala-lc-Gcd" firstAttribute="top" secondItem="FrZ-CB-PwG" secondAttribute="bottom" constant="15" id="dok-Oh-786"/>
+                <constraint firstItem="SAt-I4-2HD" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="fZt-VV-7jW"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="ala-lc-Gcd" secondAttribute="trailing" constant="20" id="hg2-cu-KI0"/>
+                <constraint firstItem="FrZ-CB-PwG" firstAttribute="top" secondItem="SAt-I4-2HD" secondAttribute="bottom" id="l9X-x1-3zz"/>
+                <constraint firstItem="ala-lc-Gcd" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="lzx-Gc-z6B"/>
+            </constraints>
+            <point key="canvasLocation" x="122" y="20"/>
         </view>
     </objects>
+    <resources>
+        <image name="livraison-rapide" width="256" height="256"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
 </document>

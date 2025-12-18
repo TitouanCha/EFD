@@ -39,6 +39,17 @@
                         <constraint firstAttribute="height" constant="165" id="8aX-7a-xVw"/>
                     </constraints>
                 </imageView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EaD-Ca-eyU">
+                    <rect key="frame" x="717" y="24" width="83" height="38"/>
+                    <state key="normal" title="Button"/>
+                    <buttonConfiguration key="configuration" style="plain" title="Retour">
+                        <fontDescription key="titleFontDescription" type="system" pointSize="20"/>
+                        <color key="baseForegroundColor" red="0.071494705975055695" green="0.090671442449092865" blue="0.18420949578285217" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    </buttonConfiguration>
+                    <connections>
+                        <action selector="goBackButton:" destination="-1" eventType="touchUpInside" id="Bws-Fm-khj"/>
+                    </connections>
+                </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WND-A6-70n">
                     <rect key="frame" x="640" y="197" width="160" height="50"/>
                     <state key="normal" title="Button"/>
@@ -67,6 +78,8 @@
                 <constraint firstItem="FmH-x9-1Oc" firstAttribute="top" secondItem="WND-A6-70n" secondAttribute="bottom" constant="15" id="bNZ-7B-C5S"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="hDQ-4k-mMs" secondAttribute="trailing" constant="40" id="fqo-Qz-wfq"/>
                 <constraint firstItem="FmH-x9-1Oc" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="mbC-8L-rDS"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="EaD-Ca-eyU" secondAttribute="trailing" constant="20" id="p4Z-ZU-jTX"/>
+                <constraint firstItem="EaD-Ca-eyU" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="t0a-FS-tQg"/>
                 <constraint firstItem="hDQ-4k-mMs" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="40" id="wQ0-t9-WFf"/>
                 <constraint firstItem="WND-A6-70n" firstAttribute="top" secondItem="hDQ-4k-mMs" secondAttribute="bottom" constant="8" symbolic="YES" id="wwo-Vd-DaE"/>
             </constraints>

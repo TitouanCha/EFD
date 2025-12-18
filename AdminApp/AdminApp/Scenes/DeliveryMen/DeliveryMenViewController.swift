@@ -15,10 +15,8 @@ class DeliveryMenViewController: UIViewController, UITableViewDataSource, UITabl
     }
     @IBOutlet weak var deliveryMenTableView: UITableView!
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        self.deliveryMenTableView.dataSource = self
-        self.deliveryMenTableView.delegate = self
+    
+    func loadDeliveryMen(){
         Delivery.getDeliveryMen { deliveryMen, err in
                 DispatchQueue.main.async {
                     if let error = err {
@@ -40,6 +38,18 @@ class DeliveryMenViewController: UIViewController, UITableViewDataSource, UITabl
                 }
             }
     }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        loadDeliveryMen()
+    }
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        self.deliveryMenTableView.dataSource = self
+        self.deliveryMenTableView.delegate = self
+        loadDeliveryMen()
+    }
+    
+    
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.deliveryMen?.count ?? 0
@@ -55,7 +65,7 @@ class DeliveryMenViewController: UIViewController, UITableViewDataSource, UITabl
         cell!.textLabel?.font = UIFont.systemFont(ofSize: 30, weight: .bold) // taille + gras
 
         cell!.detailTextLabel?.text = man.email
-        cell!.detailTextLabel?.font = UIFont.systemFont(ofSize: 20, weight: .regular)
+        cell!.detailTextLabel?.font = UIFont.systemFont(ofSize: 25, weight: .regular)
         cell!.detailTextLabel?.textColor = .darkGray
 
         return cell!
@@ -70,5 +80,9 @@ class DeliveryMenViewController: UIViewController, UITableViewDataSource, UITabl
     @IBAction func ButtonAddDeliveryMen(_ sender: Any) {
         let add = DeliveryMenAddViewController()
         self.navigationController?.pushViewController(add, animated: true)
+    }
+    
+    @IBAction func goBackButton(_ sender: Any) {
+        self.navigationController?.popViewController(animated: true)
     }
 }

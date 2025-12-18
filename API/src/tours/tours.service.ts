@@ -20,7 +20,14 @@ const tour = await this.model.create({ date, parcelIds, courierId, status: couri
 await this.parcelModel.updateMany({ _id: { $in: parcelIds } }, { status: ParcelStatus.OUT_FOR_DELIVERY, tourId: tour._id });
 return tour;
 }
-findAll() { return this.model.find().lean(); }
+
+findAll() { 
+    return this.model
+      .find()
+      .populate('parcelIds', 'trackingId recipientName address destination status weightKg')
+      .lean(); 
+}
+
 findOne(id: string) { return this.model.findById(id).lean(); }
 async update(id: string, patch: Partial<Tour>) { return this.model.findByIdAndUpdate(id, patch, { new: true }).lean(); }
 async remove(id: string) {

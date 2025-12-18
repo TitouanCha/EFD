@@ -1,14 +1,15 @@
 //
-//  delivery.swift
+//  parcelServices.swift
 //  AdminApp
 //
-//  Created by Titouan Chauché on 16/12/2025.
+//  Created by Titouan Chauché on 18/12/2025.
 //
+
 import Foundation
 
-class Delivery {
-    class func getDeliveryMen(completion: @escaping ([User]?, Error?) -> Void) {
-        let url = URL(string: "http://localhost:3001/users?role=COURIER")!
+class ParcelServices{
+    class func getParcels(completion: @escaping ([Parcel]?, Error?) -> Void) {
+        let url = URL(string: "http://localhost:3001/parcels")!
         var request = URLRequest(url: url)
         request.httpMethod = "GET"
         guard let token = UserDefaults.standard.string(forKey: "API_TOKEN") else {
@@ -29,12 +30,9 @@ class Delivery {
                 completion(nil, NSError(domain: "com.tc.invalid_json", code: 1))
                 return
             }
-            let users = jsonArr.compactMap(User.init(fromAPI:))
-            completion(users, nil)
+            let parcels = jsonArr.compactMap(Parcel.init(fromAPI:))
+            completion(parcels, nil)
         }
         dataTask.resume()
     }
-
-    
-    
 }
