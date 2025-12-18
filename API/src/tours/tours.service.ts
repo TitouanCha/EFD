@@ -44,7 +44,7 @@ async findAll() {
             path: 'parcelIds',
             select: 'trackingId recipientName address destination status weightKg'
           })
-          .populate('courierId', '_id name email phone')
+          .populate('courierId', '_id name email role')
         .lean(); 
 }
 

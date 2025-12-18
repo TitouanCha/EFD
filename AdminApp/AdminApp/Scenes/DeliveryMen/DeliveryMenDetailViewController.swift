@@ -45,7 +45,7 @@ class DeliveryMenDetailViewController: UIViewController, UITableViewDataSource, 
                     }
                     print(deliveryManTour.count)
                     self.deliveryManTour = deliveryManTour.filter {
-                        $0.courierId == self.deliveryMan.id
+                        $0.courierId.id == self.deliveryMan.id
                     }.sorted {
                         $0.date < $1.date
                     }

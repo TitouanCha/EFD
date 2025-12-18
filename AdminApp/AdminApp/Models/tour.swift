@@ -8,11 +8,11 @@
 class Tour {
     let id: String
     let date: String
-    let courierId: String
+    let courierId: User
     let parcelIds: [Parcel]
     let status: String
 
-    init(id: String, date: String, courierId: String, parcelIds: [Parcel], status: String) {
+    init(id: String, date: String, courierId: User, parcelIds: [Parcel], status: String) {
         self.id = id
         self.date = date
         self.courierId = courierId
@@ -27,7 +27,8 @@ extension Tour {
 
         guard let id = dict["_id"] as? String,
               let date = dict["date"] as? String,
-              let courierId = dict["courierId"] as? String,
+              let courierDict = dict["courierId"] as? [String: Any],
+              let courier = User(fromAPI: courierDict),
               let parcelDicts = dict["parcelIds"] as? [[String: Any]],
               let status = dict["status"] as? String
         else {
@@ -39,9 +40,10 @@ extension Tour {
         self.init(
             id: id,
             date: date,
-            courierId: courierId,
+            courierId: courier,
             parcelIds: parcels,
             status: status
         )
     }
 }
+
