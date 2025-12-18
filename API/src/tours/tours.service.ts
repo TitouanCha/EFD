@@ -33,6 +33,7 @@ async create(date: string, parcelIds: string[], courierId?: string) {
     return this.model
       .findById(tour._id)
       .populate('parcelIds', 'trackingId recipientName address destination status weightKg')
+      
       .lean();
   }
 
@@ -43,6 +44,7 @@ async findAll() {
             path: 'parcelIds',
             select: 'trackingId recipientName address destination status weightKg'
           })
+          .populate('courierId', '_id name email phone')
         .lean(); 
 }
 
