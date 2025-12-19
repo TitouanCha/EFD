@@ -14,29 +14,34 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(
         _ application: UIApplication,
+        supportedInterfaceOrientationsFor window: UIWindow?
+    ) -> UIInterfaceOrientationMask {
+        return .portrait
+    }
+
+    func application(
+        _ application: UIApplication,
         didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?
     ) -> Bool {
 
         window = UIWindow(frame: UIScreen.main.bounds)
 
-        let rootVC: UIViewController
-
         if SessionManager.shared.isLoggedIn {
-            rootVC = HomeViewController(
+            let homeVC = HomeViewController(
                 nibName: "HomeViewController",
                 bundle: nil
             )
+            let nav = UINavigationController(rootViewController: homeVC)
+            window?.rootViewController = nav
         } else {
-            rootVC = LoginViewController(
+            let loginVC = LoginViewController(
                 nibName: "LoginViewController",
                 bundle: nil
             )
+            window?.rootViewController = loginVC
         }
 
-        let nav = UINavigationController(rootViewController: rootVC)
-        window?.rootViewController = nav
-        window?.makeKeyAndVisible()
-
+        window?.makeKeAndVisible()
         return true
     }
 }
