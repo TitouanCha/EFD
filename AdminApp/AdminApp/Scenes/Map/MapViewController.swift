@@ -75,9 +75,10 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
         guard let annotation = view.annotation as? ParcelAnnotation else { return }
 
-        //let parcel = annotation.parcel
-        //let vc = ParcelDetailViewController.newInstance(parcel: parcel)
-        //self.navigationController?.pushViewController(vc, animated: true)
+        let parcel = annotation.parcel
+        let detail = DetailStockViewController.newInstance(parcel: parcel)
+        self.navigationController?.pushViewController(detail, animated: true)
+        
     }
 
     

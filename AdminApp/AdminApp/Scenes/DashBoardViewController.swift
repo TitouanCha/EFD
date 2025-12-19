@@ -40,5 +40,10 @@ class DashBoardViewController: UIViewController {
         navigationController!.pushViewController(deliveryViewController, animated: true)
     }
     
+    @IBAction func logoutBtn(_ sender: Any) {
+        UIView.transition(with: self.navigationController!.view, duration: 0.3, options: .transitionCrossDissolve) {
+            self.navigationController?.viewControllers = [HomeViewController(nibName: "HomeViewController", bundle: nil)]
+        }
+    }
     
 }

@@ -86,7 +86,13 @@ class StockViewController: UIViewController, UITableViewDataSource, UITableViewD
     
     }
 
-
+    @IBAction func addParcelBtn(_ sender: Any) {
+        let add = AddStockViewController()
+        self.navigationController?.pushViewController(add, animated: true)
+    }
     
-
+    @IBAction func goBackBtn(_ sender: Any) {
+        self.navigationController?.popViewController(animated: true)
+    }
+    
 }

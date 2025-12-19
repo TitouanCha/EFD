@@ -126,6 +126,9 @@
                                 <fontDescription key="titleFontDescription" type="system" pointSize="23"/>
                                 <color key="baseBackgroundColor" red="0.071494705975055695" green="0.090671442449092865" blue="0.18420949578285217" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </buttonConfiguration>
+                            <connections>
+                                <action selector="tourDetailBtn:" destination="-1" eventType="touchUpInside" id="vKE-nn-eUv"/>
+                            </connections>
                         </button>
                     </subviews>
                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -176,6 +179,9 @@
                                 <fontDescription key="titleFontDescription" type="system" pointSize="23"/>
                                 <color key="baseBackgroundColor" red="0.071494705975055695" green="0.090671442449092865" blue="0.18420949578285217" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </buttonConfiguration>
+                            <connections>
+                                <action selector="deliveryMan:" destination="-1" eventType="touchUpInside" id="upO-7G-3eH"/>
+                            </connections>
                         </button>
                     </subviews>
                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>

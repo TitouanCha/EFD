@@ -40,6 +40,9 @@
                         <color key="baseForegroundColor" red="0.91368454690000001" green="0.88223129509999998" blue="0.83181983230000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <color key="baseBackgroundColor" red="0.080517239870000007" green="0.099912457169999996" blue="0.19818994400000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </buttonConfiguration>
+                    <connections>
+                        <action selector="addParcelBtn:" destination="-1" eventType="touchUpInside" id="Jw6-aM-I7e"/>
+                    </connections>
                 </button>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="5Im-KT-tcs">
                     <rect key="frame" x="20" y="260" width="780" height="900"/>
@@ -48,6 +51,17 @@
                     <color key="sectionIndexColor" red="0.071494705975055695" green="0.090671442449092865" blue="0.18420949578285217" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <color key="sectionIndexBackgroundColor" red="0.91368454694747925" green="0.88223129510879517" blue="0.83181983232498169" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                 </tableView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kcX-iK-hdB">
+                    <rect key="frame" x="717" y="24" width="83" height="38"/>
+                    <state key="normal" title="Button"/>
+                    <buttonConfiguration key="configuration" style="plain" title="Retour">
+                        <fontDescription key="titleFontDescription" type="system" pointSize="20"/>
+                        <color key="baseForegroundColor" red="0.071494705975055695" green="0.090671442449092865" blue="0.18420949578285217" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    </buttonConfiguration>
+                    <connections>
+                        <action selector="goBackBtn:" destination="-1" eventType="touchUpInside" id="5AW-Zk-hcI"/>
+                    </connections>
+                </button>
             </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" red="0.91368454694747925" green="0.88223129510879517" blue="0.83181983232498169" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -63,6 +77,8 @@
                 <constraint firstAttribute="trailing" secondItem="6Wk-Pk-WhB" secondAttribute="trailing" constant="40" id="a84-Uh-1iO"/>
                 <constraint firstItem="l6b-Jw-0bT" firstAttribute="top" secondItem="rkA-bd-yoT" secondAttribute="bottom" constant="8" symbolic="YES" id="aCH-Bj-m5Y"/>
                 <constraint firstItem="l6b-Jw-0bT" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="40" id="gMx-xu-Qat"/>
+                <constraint firstItem="kcX-iK-hdB" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="jk1-ec-Ty2"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="kcX-iK-hdB" secondAttribute="trailing" constant="20" id="msE-tF-1mp"/>
             </constraints>
             <point key="canvasLocation" x="96" y="20"/>
         </view>

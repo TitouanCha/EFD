@@ -63,6 +63,18 @@ class DetailStockViewController: UIViewController {
         }
     }
 
+    @IBAction func tourDetailBtn(_ sender: Any) {
+        let detail = DetailTourViewController.newInstance(deliveryTour: tour)
+        self.navigationController?.pushViewController(detail, animated: true)
+
+    }
+    
+    @IBAction func deliveryMan(_ sender: Any) {
+        let deliveryMan = self.tour.courierId
+        let detail = DeliveryMenDetailViewController.newInstance(deliveryMan: deliveryMan)
+        self.navigationController?.pushViewController(detail, animated: true)
+    }
+    
     @IBAction func goBackBtn(_ sender: Any) {
         self.navigationController?.popViewController(animated: true)
     }

@@ -70,6 +70,9 @@ class DetailTourViewController: UIViewController, UITableViewDataSource, UITable
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let parcel = deliveryParcels![indexPath.row]
+        let detail = DetailStockViewController.newInstance(parcel: parcel)
+        self.navigationController?.pushViewController(detail, animated: true)
     }
     
     @IBAction func userDetailBtn(_ sender: Any) {
