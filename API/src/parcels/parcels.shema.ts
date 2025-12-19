@@ -31,6 +31,9 @@ export class Parcel {
   @Prop({ enum: Object.values(ParcelStatus), default: ParcelStatus.PENDING })
   status: ParcelStatus;
 
+  @Prop({ type: Types.ObjectId, ref: 'User', required: true, index: true })
+  clientId: Types.ObjectId;
+
   @Prop({ type: Types.ObjectId, ref: 'Tour' })
   tourId?: Types.ObjectId;
 }

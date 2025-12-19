@@ -1,6 +1,7 @@
 import { IsNumber, IsOptional, IsString, ValidateNested } from 'class-validator';
 import { Type } from 'class-transformer';
 import { PointDto } from '../../common/dto/point.dto';
+import { Types } from 'mongoose';
 
 export class CreateParcelDto {
   @IsString()
@@ -19,4 +20,7 @@ export class CreateParcelDto {
   @ValidateNested()
   @Type(() => PointDto)
   destination?: PointDto;
+
+  @IsOptional()
+  clientId?: Types.ObjectId;
 }

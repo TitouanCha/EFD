@@ -23,5 +23,9 @@ findByCourier(courierId: string) {
     .find({ courierId })
     .lean();
 }
+findByClient(clientId: string) {
+  return this.model.find({ clientId }).lean();
+}
+
 
 }

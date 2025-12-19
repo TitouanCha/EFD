@@ -8,6 +8,7 @@ import { Role } from '../common/roles';
 import { RolesGuard } from '../common/guards/roles.guard';
 import { AuthGuard } from '@nestjs/passport';
 import { Req } from '@nestjs/common';
+import { Types } from 'mongoose';
 
 
 @ApiTags('parcels')
@@ -20,13 +21,23 @@ constructor(private readonly parcels: ParcelsService) {}
 
 @Roles(Role.ADMIN, Role.CLIENT)
 @Post()
-create(@Body() dto: CreateParcelDto) { return this.parcels.create(dto); }
+create(@Body() dto: CreateParcelDto, @Req() req: any) { 
+  if (req.user?.role === Role.CLIENT) {
+    return this.parcels.create({ ...dto, clientId: new Types.ObjectId(req.user.sub) });
+  }
+  return this.parcels.create(dto);
+}
 
 
 @Roles(Role.ADMIN)
 @Get()
 findAll() { return this.parcels.findAll(); }
 
+@Roles(Role.CLIENT)
+@Get('me')
+findMyParcelsClient(@Req() req: any) {
+  return this.parcels.findByClient(req.user.sub);
+}
 
 @Roles(Role.ADMIN, Role.CLIENT)
 @Get(':id')
