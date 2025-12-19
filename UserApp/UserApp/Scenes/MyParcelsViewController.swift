@@ -7,23 +7,63 @@
 
 import UIKit
 
-class MyParcelsViewController: UIViewController {
+final class MyParcelsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    @IBOutlet weak var tableView: UITableView!
 
-        // Do any additional setup after loading the view.
-    }
+    private var parcels: [Parcel] = []
 
+        override func viewDidLoad() {
+            super.viewDidLoad()
+            title = "Mes colis"
 
-    /*
-    // MARK: - Navigation
+            tableView.dataSource = self
+            tableView.delegate = self
+            tableView.register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
+            navigationItem.rightBarButtonItem = UIBarButtonItem(
+                barButtonSystemItem: .add,
+                target: self,
+                action: #selector(didTapAdd)
+            )
 
+            loadParcels()
+        }
+
+        @objc private func didTapAdd() {
+            navigationController?.pushViewController(CreateParcelViewController(), animated: true)
+        }
+
+        private func loadParcels() {
+            Task {
+                do {
+                    let data = try await APIClient.shared.getMyParcels()
+                    await MainActor.run {
+                        self.parcels = data
+                        self.tableView.reloadData()
+                    }
+                } catch {
+                    print("getMyParcels error:", error)
+                }
+            }
+        }
+
+        override func viewWillAppear(_ animated: Bool) {
+            super.viewWillAppear(animated)
+            loadParcels()
+        }
+
+        func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+            parcels.count
+        }
+
+        func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
+            let p = parcels[indexPath.row]
+            let status = p.status ?? ""
+            cell.textLabel?.text = status.isEmpty ? p.trackingId : "\(p.trackingId) — \(status)"
+            cell.accessoryType = .disclosureIndicator
+            return cell
+        }
 }
+

@@ -7,23 +7,30 @@
 
 import UIKit
 
-class HomeViewController: UIViewController {
+final class HomeViewController: UIViewController {
+
+    @IBOutlet weak var trackingButton: UIButton!
+    @IBOutlet weak var loginButton: UIButton!
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        trackingButton.setTitle(String?("Suivre un colis"), for: .normal)
+        if AuthStore.shared.token != nil {
+            loginButton.setTitle(String?("Client Area"), for: .normal)
+        } else {
+            loginButton.setTitle(String?("Connexion"), for: .normal)
+        }
     }
 
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    @IBAction func didTapTracking(_ sender: Any) {
+        navigationController?.pushViewController(TrackingViewController(), animated: true)
     }
-    */
 
+    @IBAction func didTapLogin(_ sender: Any) {
+        if AuthStore.shared.token == nil {
+                navigationController?.pushViewController(LoginViewController(), animated: true)
+            } else {
+                navigationController?.pushViewController(ClientAreaViewController(), animated: true)
+            }
+    }
 }

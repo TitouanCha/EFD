@@ -7,23 +7,23 @@
 
 import UIKit
 
-class ClientAreaViewController: UIViewController {
+final class ClientAreaViewController: UIViewController {
 
+    @IBOutlet weak var DeconexionButton: UIButton!
+    @IBOutlet weak var ParcelsButton: UIButton!
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        ParcelsButton.setTitle("Mes colis", for: .normal)
+        DeconexionButton.setTitle("Déconnexion", for: .normal)
     }
 
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    @IBAction func didTapMyParcels(_ sender: Any) {
+        navigationController?.pushViewController(MyParcelsViewController(), animated: true)
     }
-    */
 
+    @IBAction func didTapLogout(_ sender: Any) {
+        AuthStore.shared.logout()
+        navigationController?.popToRootViewController(animated: true)
+    }
 }
+

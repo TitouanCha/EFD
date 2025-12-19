@@ -18,6 +18,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window.rootViewController =
         UINavigationController(rootViewController:HomeViewController())
         window.makeKeyAndVisible()
+        Task {
+            do {
+                let url = URL(string: "http://localhost:3001")!
+                let (data, resp) = try await URLSession.shared.data(from: url)
+                print("STATUS:", (resp as? HTTPURLResponse)?.statusCode ?? -1)
+                print("BODY:", String(data: data, encoding: .utf8) ?? "nil")
+            } catch {
+                print("API FAIL:", error)
+            }
+        }
+
         self.window = window
         
         return true
