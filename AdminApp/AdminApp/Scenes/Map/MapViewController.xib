@@ -6,13 +6,12 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23506"/>
         <capability name="Map view configurations" minToolsVersion="14.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
-        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MapViewController" customModule="AdminApp" customModuleProvider="target">
             <connections>
-                <outlet property="DeliveryMap" destination="x3t-gQ-Ofc" id="syq-a8-gSs"/>
+                <outlet property="DeliveryMap" destination="ldB-Wn-IEa" id="QSC-Uh-Bpm"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -21,25 +20,62 @@
             <rect key="frame" x="0.0" y="0.0" width="820" height="1180"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="x3t-gQ-Ofc">
-                    <rect key="frame" x="0.0" y="24" width="820" height="1136"/>
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="carte" translatesAutoresizingMaskIntoConstraints="NO" id="sqb-sB-jy8">
+                    <rect key="frame" x="40" y="24" width="740" height="165"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="165" id="h14-4L-ARO"/>
+                    </constraints>
+                </imageView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jL1-pB-Vdz">
+                    <rect key="frame" x="717" y="24" width="83" height="38"/>
+                    <state key="normal" title="Button"/>
+                    <buttonConfiguration key="configuration" style="plain" title="Retour">
+                        <fontDescription key="titleFontDescription" type="system" pointSize="20"/>
+                        <color key="baseForegroundColor" red="0.071494705975055695" green="0.090671442449092865" blue="0.18420949578285217" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    </buttonConfiguration>
+                    <connections>
+                        <action selector="goBackButton:" destination="-1" eventType="touchUpInside" id="j4d-8k-ppX"/>
+                    </connections>
+                </button>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Suivie des colis" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pvk-yB-M6d">
+                    <rect key="frame" x="100" y="197" width="620" height="48"/>
+                    <fontDescription key="fontDescription" type="boldSystem" pointSize="40"/>
+                    <color key="textColor" red="0.25134855509999998" green="0.15969821810000001" blue="0.1523262262" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ldB-Wn-IEa">
+                    <rect key="frame" x="20" y="265" width="780" height="875"/>
                     <standardMapConfiguration key="preferredConfiguration"/>
                 </mapView>
             </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
-            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+            <color key="backgroundColor" red="0.91368454694747925" green="0.88223129510879517" blue="0.83181983232498169" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="x3t-gQ-Ofc" secondAttribute="trailing" id="3ws-rj-pu8"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="x3t-gQ-Ofc" secondAttribute="bottom" id="V8h-Ve-gcm"/>
-                <constraint firstItem="x3t-gQ-Ofc" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="gPC-qH-xJd"/>
-                <constraint firstItem="x3t-gQ-Ofc" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="gle-0a-gjL"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="jL1-pB-Vdz" secondAttribute="trailing" constant="20" id="41G-SA-NXT"/>
+                <constraint firstItem="jL1-pB-Vdz" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="KaJ-TZ-gxX"/>
+                <constraint firstItem="sqb-sB-jy8" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="Mdn-tj-RtV"/>
+                <constraint firstItem="pvk-yB-M6d" firstAttribute="top" secondItem="sqb-sB-jy8" secondAttribute="bottom" constant="8" symbolic="YES" id="NbV-Ul-x2t"/>
+                <constraint firstItem="ldB-Wn-IEa" firstAttribute="top" secondItem="pvk-yB-M6d" secondAttribute="bottom" constant="20" id="ONa-K4-LXb"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="ldB-Wn-IEa" secondAttribute="bottom" constant="20" id="Ty6-pu-w8G"/>
+                <constraint firstItem="ldB-Wn-IEa" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="WW9-f1-gnd"/>
+                <constraint firstItem="sqb-sB-jy8" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="40" id="eGD-EB-UuE"/>
+                <constraint firstItem="pvk-yB-M6d" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="100" id="gSK-JP-Nlz"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="ldB-Wn-IEa" secondAttribute="trailing" constant="20" id="kSL-CT-Ncm"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="sqb-sB-jy8" secondAttribute="trailing" constant="40" id="s2R-j1-3zv"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="pvk-yB-M6d" secondAttribute="trailing" constant="100" id="yM7-Ez-oHy"/>
             </constraints>
             <point key="canvasLocation" x="139" y="20"/>
         </view>
+        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Nouvelle tournée" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="WtB-Um-ltM">
+            <rect key="frame" x="0.0" y="0.0" width="620" height="48"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <fontDescription key="fontDescription" type="boldSystem" pointSize="40"/>
+            <color key="textColor" red="0.25134855509999998" green="0.15969821810000001" blue="0.1523262262" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <nil key="highlightedColor"/>
+            <point key="canvasLocation" x="91" y="-326"/>
+        </label>
     </objects>
     <resources>
-        <systemColor name="systemBackgroundColor">
-            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
+        <image name="carte" width="512" height="512"/>
     </resources>
 </document>

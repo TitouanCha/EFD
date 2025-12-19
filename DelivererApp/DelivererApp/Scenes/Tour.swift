@@ -9,7 +9,7 @@ struct Tour: Codable {
     let id: String
     let date: String
     let status: String
-    let parcelIds: [String]
+    let parcelIds: [Parcel]
 
     enum CodingKeys: String, CodingKey {
         case id = "_id"

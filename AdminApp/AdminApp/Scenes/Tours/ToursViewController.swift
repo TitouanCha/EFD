@@ -65,9 +65,10 @@ class ToursViewController: UIViewController, UITableViewDataSource, UITableViewD
         cell!.textLabel?.text = tour.date
         cell!.textLabel?.font = UIFont.systemFont(ofSize: 30, weight: .bold)
         
-        cell!.detailTextLabel?.numberOfLines = 2
+        cell!.detailTextLabel?.numberOfLines = 3
         cell!.detailTextLabel?.text =
         """
+        Livreur : \(tour.courierId.name)
         Nombre de colis : \(tour.parcelIds.count)
         Statut : \(tour.status)
         """
@@ -79,7 +80,9 @@ class ToursViewController: UIViewController, UITableViewDataSource, UITableViewD
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
+        let tour = self.deliveryTour![indexPath.row]
+        let detail = DetailTourViewController.newInstance(deliveryTour: tour)
+        self.navigationController?.pushViewController(detail, animated: true)
     }
 
     @IBAction func addTourbtn(_ sender: Any) {

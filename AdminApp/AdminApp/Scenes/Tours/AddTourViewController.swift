@@ -72,7 +72,9 @@ class AddTourViewController: UIViewController, UITableViewDataSource, UITableVie
                         return
                     }
                     print(parcels.count)
-                    self.parcels = parcels
+                    self.parcels = parcels.filter {
+                        $0.status == "PENDING"
+                    }
                 }
             }
     }

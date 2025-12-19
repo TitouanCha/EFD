@@ -74,6 +74,17 @@
                         <action selector="mapButton:" destination="-1" eventType="touchUpInside" id="ht0-ZR-LCN"/>
                     </connections>
                 </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b58-b0-Yh1">
+                    <rect key="frame" x="200" y="410" width="420" height="56"/>
+                    <state key="normal" title="Button"/>
+                    <buttonConfiguration key="configuration" style="filled" title="Stock">
+                        <fontDescription key="titleFontDescription" type="system" pointSize="35"/>
+                        <color key="baseBackgroundColor" red="0.071494705980000003" green="0.09067144245" blue="0.18420949580000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    </buttonConfiguration>
+                    <connections>
+                        <action selector="stockButton:" destination="-1" eventType="touchUpInside" id="j25-uA-jdg"/>
+                    </connections>
+                </button>
             </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" red="0.91368454694747925" green="0.88223129510879517" blue="0.83181983232498169" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -81,6 +92,7 @@
                 <constraint firstItem="yF4-SU-abi" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="2u6-uP-IaD"/>
                 <constraint firstItem="yF4-SU-abi" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="200" id="6VS-k1-P65"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="gRH-Qx-GBg" secondAttribute="trailing" constant="200" id="8Zf-C8-L0z"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="b58-b0-Yh1" secondAttribute="trailing" constant="200" id="9as-ea-Qqy"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="yF4-SU-abi" secondAttribute="trailing" constant="200" id="Arl-sp-rMx"/>
                 <constraint firstItem="Fp3-0S-1jm" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="200" id="IKl-dJ-kzu"/>
                 <constraint firstItem="yF4-SU-abi" firstAttribute="top" secondItem="gRH-Qx-GBg" secondAttribute="bottom" constant="20" id="NC4-M1-lcE"/>
@@ -92,9 +104,11 @@
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="yZ1-41-biu" secondAttribute="trailing" constant="100" id="cJh-Qe-Wis"/>
                 <constraint firstItem="x7J-2C-883" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="125" id="gGd-jc-f0k"/>
                 <constraint firstItem="yZ1-41-biu" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="100" id="gxj-89-bcr"/>
+                <constraint firstItem="gRH-Qx-GBg" firstAttribute="top" secondItem="b58-b0-Yh1" secondAttribute="bottom" constant="20" id="inZ-s8-C8l"/>
                 <constraint firstItem="gRH-Qx-GBg" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="200" id="kr1-2l-Nq8"/>
                 <constraint firstItem="Fp3-0S-1jm" firstAttribute="top" secondItem="EZI-CE-QMU" secondAttribute="bottom" constant="20" id="lFA-yW-qoN"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="Fp3-0S-1jm" secondAttribute="trailing" constant="200" id="u1B-cM-KFz"/>
+                <constraint firstItem="b58-b0-Yh1" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="200" id="vqX-82-YDa"/>
                 <constraint firstItem="EZI-CE-QMU" firstAttribute="top" secondItem="yF4-SU-abi" secondAttribute="bottom" constant="20" id="xsj-Ho-3mn"/>
             </constraints>
             <point key="canvasLocation" x="97.317073170731703" y="19.830508474576273"/>

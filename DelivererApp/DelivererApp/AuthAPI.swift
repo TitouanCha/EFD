@@ -14,8 +14,6 @@ final class AuthAPI {
 
     private let baseURL = "http://localhost:3001"
 
-    // MARK: - LOGIN
-
     func login(
         email: String,
         password: String,
@@ -39,8 +37,6 @@ final class AuthAPI {
         }.resume()
     }
 
-    // MARK: - TOURS (TOKEN REQUIRED)
-
     func getMyTours(completion: @escaping ([Tour]) -> Void) {
 
         guard
@@ -61,53 +57,86 @@ final class AuthAPI {
         }.resume()
     }
 
-    // MARK: - PROOFS (TOKEN REQUIRED)
 
     func sendProof(
+        token: String,
+        courierId: String,
         parcelId: String,
         image: UIImage,
         lat: Double,
         lng: Double,
         completion: @escaping () -> Void
     ) {
-        guard let token = SessionManager.shared.token else { return }
+        guard let url = URL(string: "\(baseURL)/proofs") else { return }
 
-        let url = URL(string: "\(baseURL)/proofs")!
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
 
         let boundary = UUID().uuidString
-        request.setValue("multipart/form-data; boundary=\(boundary)", forHTTPHeaderField: "Content-Type")
+        request.setValue(
+            "multipart/form-data; boundary=\(boundary)",
+            forHTTPHeaderField: "Content-Type"
+        )
 
-        var data = Data()
+        let body = createMultipartBody(
+            boundary: boundary,
+            courierId: courierId,
+            parcelId: parcelId,
+            image: image,
+            lat: lat,
+            lng: lng
+        )
 
-        func add(_ s: String) { data.append(s.data(using: .utf8)!) }
-
-        add("--\(boundary)\r\n")
-        add("Content-Disposition: form-data; name=\"parcelId\"\r\n\r\n\(parcelId)\r\n")
-
-        add("--\(boundary)\r\n")
-        add("Content-Disposition: form-data; name=\"lat\"\r\n\r\n\(lat)\r\n")
-
-        add("--\(boundary)\r\n")
-        add("Content-Disposition: form-data; name=\"lng\"\r\n\r\n\(lng)\r\n")
-
-        if let img = image.jpegData(compressionQuality: 0.7) {
-            add("--\(boundary)\r\n")
-            add("Content-Disposition: form-data; name=\"image\"; filename=\"proof.jpg\"\r\n")
-            add("Content-Type: image/jpeg\r\n\r\n")
-            data.append(img)
-            add("\r\n")
-        }
-
-        add("--\(boundary)--\r\n")
-        request.httpBody = data
+        request.httpBody = body
 
         URLSession.shared.dataTask(with: request) { _, _, _ in
             completion()
         }.resume()
     }
+    private func createMultipartBody(
+        boundary: String,
+        courierId: String,
+        parcelId: String,
+        image: UIImage,
+        lat: Double,
+        lng: Double
+    ) -> Data {
+
+        var data = Data()
+
+        func append(_ string: String) {
+            data.append(string.data(using: .utf8)!)
+        }
+
+        append("--\(boundary)\r\n")
+        append("Content-Disposition: form-data; name=\"courierId\"\r\n\r\n")
+        append("\(courierId)\r\n")
+
+        append("--\(boundary)\r\n")
+        append("Content-Disposition: form-data; name=\"parcelId\"\r\n\r\n")
+        append("\(parcelId)\r\n")
+
+        append("--\(boundary)\r\n")
+        append("Content-Disposition: form-data; name=\"lat\"\r\n\r\n")
+        append("\(lat)\r\n")
+
+        append("--\(boundary)\r\n")
+        append("Content-Disposition: form-data; name=\"lng\"\r\n\r\n")
+        append("\(lng)\r\n")
+
+        if let imageData = image.jpegData(compressionQuality: 0.7) {
+            append("--\(boundary)\r\n")
+            append("Content-Disposition: form-data; name=\"image\"; filename=\"proof.jpg\"\r\n")
+            append("Content-Type: image/jpeg\r\n\r\n")
+            data.append(imageData)
+            append("\r\n")
+        }
+
+        append("--\(boundary)--\r\n")
+        return data
+    }
+
 }
 
 
