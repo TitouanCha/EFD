@@ -14,8 +14,6 @@ final class AuthAPI {
 
     private let baseURL = "http://localhost:3001"
 
-    // MARK: - LOGIN
-
     func login(
         email: String,
         password: String,
@@ -39,8 +37,6 @@ final class AuthAPI {
         }.resume()
     }
 
-    // MARK: - TOURS (TOKEN REQUIRED)
-
     func getMyTours(completion: @escaping ([Tour]) -> Void) {
 
         guard
@@ -61,7 +57,6 @@ final class AuthAPI {
         }.resume()
     }
 
-    // MARK: - PROOFS (TOKEN REQUIRED)
 
     func sendProof(
         token: String,

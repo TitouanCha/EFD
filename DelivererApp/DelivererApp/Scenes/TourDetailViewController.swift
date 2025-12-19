@@ -11,25 +11,20 @@ import CoreLocation
 
 class TourDetailViewController: UIViewController {
 
-    // MARK: - Outlets
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var statusLabel: UILabel!
     @IBOutlet weak var parcelsLabel: UILabel!
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var validateButton: UIButton!
 
-    // MARK: - Data
     var tour: Tour!
     private var currentParcelIndex = 0
 
-    // MARK: - Location
     private let locationManager = CLLocationManager()
     private var currentLocation: CLLocation?
 
-    // MARK: - Image
     private var selectedImage: UIImage?
 
-    // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Détail tournée"
@@ -38,8 +33,6 @@ class TourDetailViewController: UIViewController {
         updateUI()
         showCurrentParcelOnMap()
     }
-
-    // MARK: - UI
     private func setupButton() {
         validateButton.setTitle("Valider la livraison", for: .normal)
         validateButton.layer.cornerRadius = 10
@@ -53,7 +46,6 @@ class TourDetailViewController: UIViewController {
         parcelsLabel.text = "Colis : \(currentParcelIndex + 1)/\(tour.parcelIds.count)"
     }
 
-    // MARK: - Location
     private func setupLocation() {
         locationManager.delegate = self
         locationManager.requestWhenInUseAuthorization()
@@ -61,7 +53,6 @@ class TourDetailViewController: UIViewController {
         mapView.showsUserLocation = true
     }
 
-    // MARK: - Map
     private func showCurrentParcelOnMap() {
         mapView.removeAnnotations(mapView.annotations)
 
@@ -89,7 +80,6 @@ class TourDetailViewController: UIViewController {
         mapView.setRegion(region, animated: true)
     }
 
-    // MARK: - Actions
     @IBAction func validateTapped(_ sender: UIButton) {
         openCamera()
     }
@@ -108,7 +98,6 @@ class TourDetailViewController: UIViewController {
         present(picker, animated: true)
     }
 
-    // MARK: - API
     private func sendProof() {
         guard
             let image = selectedImage,
@@ -142,13 +131,11 @@ class TourDetailViewController: UIViewController {
             updateUI()
             showCurrentParcelOnMap()
         } else {
-            // Tous les colis livrés → l’API passera la tournée en COMPLETED
             self.navigationController?.popViewController(animated: true)
         }
     }
 }
 
-// MARK: - CLLocationManagerDelegate
 extension TourDetailViewController: CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager,
                          didUpdateLocations locations: [CLLocation]) {
@@ -156,7 +143,6 @@ extension TourDetailViewController: CLLocationManagerDelegate {
     }
 }
 
-// MARK: - UIImagePickerControllerDelegate
 extension TourDetailViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
     func imagePickerController(_ picker: UIImagePickerController,
