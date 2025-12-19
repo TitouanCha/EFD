@@ -48,7 +48,17 @@ async findAll() {
         .lean(); 
 }
 
-findOne(id: string) { return this.model.findById(id).lean(); }
+findOne(id: string) { 
+    return this.model
+    .findById(id)
+    .populate({
+        path: 'parcelIds',
+        select: 'trackingId recipientName address destination status weightKg'
+      })
+      .populate('courierId', '_id name email role')
+    .lean(); 
+}
+
 async update(id: string, patch: Partial<Tour>) { return this.model.findByIdAndUpdate(id, patch, { new: true }).lean(); }
 async remove(id: string) {
 const t = await this.model.findByIdAndDelete(id);

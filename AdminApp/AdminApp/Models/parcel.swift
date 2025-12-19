@@ -6,6 +6,7 @@
 //
 
 import CoreLocation
+import MapKit
 
 class Parcel {
     
@@ -16,6 +17,7 @@ class Parcel {
     let address: String
     let destination: CLLocationCoordinate2D
     let status: String
+    let tourId: String?
 
     init(
         trackingId: String,
@@ -24,7 +26,8 @@ class Parcel {
         address: String,
         destination: CLLocationCoordinate2D,
         status: String,
-        id: String
+        id: String,
+        tourId: String? = nil
     ) {
         self.trackingId = trackingId
         self.weightKg = weightKg
@@ -33,6 +36,7 @@ class Parcel {
         self.destination = destination
         self.status = status
         self.id = id
+        self.tourId = tourId
     }
 }
 
@@ -58,7 +62,35 @@ extension Parcel {
             longitude: coordinates[0]
         )
         
-        self.init(trackingId: trackingId, weightKg: weightKg, recipientName: recipientName, address: address, destination: destination, status: status, id: id)
+        let tourId = dict["tourId"] as? String  // récupère tourId si présent
+
+        self.init(
+            trackingId: trackingId,
+            weightKg: weightKg,
+            recipientName: recipientName,
+            address: address,
+            destination: destination,
+            status: status,
+            id: id,
+            tourId: tourId
+        )
+    }
+}
+
+
+class ParcelAnnotation: NSObject, MKAnnotation {
+    let parcel: Parcel
+    var coordinate: CLLocationCoordinate2D {
+        parcel.destination
+    }
+    var title: String? {
+        "Colis \(parcel.trackingId)"
+    }
+    var subtitle: String? {
+        parcel.status
+    }
+    init(parcel: Parcel) {
+        self.parcel = parcel
     }
 }
 

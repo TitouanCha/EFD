@@ -15,7 +15,11 @@ class DashBoardViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
 
-
+    @IBAction func stockButton(_ sender: Any) {
+        let stockViewController = StockViewController()
+        navigationController!.pushViewController(stockViewController, animated: true)
+    }
+    
     @IBAction func mapButton(_ sender: UIButton) {
         let mapViewController = MapViewController()
         navigationController!.pushViewController(mapViewController, animated: true)

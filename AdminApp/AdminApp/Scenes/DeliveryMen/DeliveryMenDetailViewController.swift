@@ -59,8 +59,8 @@ class DeliveryMenDetailViewController: UIViewController, UITableViewDataSource, 
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-        deliveryManName.text = deliveryMan.name
-        deliveryManEmail.text = deliveryMan.email
+        deliveryManName.text = "Nom : \(deliveryMan.name)"
+        deliveryManEmail.text = "Email : \(deliveryMan.email)"
         
         self.tourTableView.dataSource = self
         self.tourTableView.delegate = self
@@ -94,7 +94,9 @@ class DeliveryMenDetailViewController: UIViewController, UITableViewDataSource, 
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
+        let tourDetail = self.deliveryManTour![indexPath.row]
+        let detail = DetailTourViewController.newInstance(deliveryTour: tourDetail)
+        self.navigationController?.pushViewController(detail, animated: true)
     }
 
     @IBAction func suppButton(_ sender: Any) {

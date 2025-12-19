@@ -33,7 +33,7 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FrZ-CB-PwG">
-                    <rect key="frame" x="541" y="189" width="259" height="50"/>
+                    <rect key="frame" x="541" y="194" width="259" height="50"/>
                     <state key="normal" title="Button"/>
                     <buttonConfiguration key="configuration" style="filled" title="Nouvelle Tournée">
                         <fontDescription key="titleFontDescription" type="system" weight="semibold" pointSize="30"/>
@@ -45,7 +45,7 @@
                     </connections>
                 </button>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="ala-lc-Gcd">
-                    <rect key="frame" x="20" y="254" width="780" height="906"/>
+                    <rect key="frame" x="20" y="259" width="780" height="901"/>
                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     <inset key="separatorInset" minX="15" minY="0.0" maxX="0.0" maxY="0.0"/>
                     <color key="sectionIndexColor" red="0.071494705975055695" green="0.090671442449092865" blue="0.18420949578285217" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -77,7 +77,7 @@
                 <constraint firstItem="ala-lc-Gcd" firstAttribute="top" secondItem="FrZ-CB-PwG" secondAttribute="bottom" constant="15" id="dok-Oh-786"/>
                 <constraint firstItem="SAt-I4-2HD" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="fZt-VV-7jW"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="ala-lc-Gcd" secondAttribute="trailing" constant="20" id="hg2-cu-KI0"/>
-                <constraint firstItem="FrZ-CB-PwG" firstAttribute="top" secondItem="SAt-I4-2HD" secondAttribute="bottom" id="l9X-x1-3zz"/>
+                <constraint firstItem="FrZ-CB-PwG" firstAttribute="top" secondItem="SAt-I4-2HD" secondAttribute="bottom" constant="5" id="l9X-x1-3zz"/>
                 <constraint firstItem="ala-lc-Gcd" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="lzx-Gc-z6B"/>
             </constraints>
             <point key="canvasLocation" x="122" y="20"/>
